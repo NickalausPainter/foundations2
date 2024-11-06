@@ -14,12 +14,13 @@ def InsertionSort(A: list, n: int):
             A[j], A[j-1] = A[j-1], A[j]
             j = j - 1
 
+
 def Merge(A: list, lower: int, mid: int, upper: int):
-    L = A[lower:mid] + [float("inf")] # L = [A[lower], A[lower+1], ..., A[mid-1]]
-    R = A[mid:upper] + [float("inf")] # R = [A[mid], A[mid+1], ..., A[upper-1]]
+    L = A[lower:mid+1] + [float("inf")]
+    R = A[mid+1:upper+1] + [float("inf")]
     i = 0
     j = 0
-    for k in range(lower,upper):
+    for k in range(lower,upper+1):
         if L[i] < R[j]:
             A[k] = L[i]
             i = i + 1
@@ -33,7 +34,7 @@ def Merge(A: list, lower: int, mid: int, upper: int):
 def MergeSort(A: list, i: int, j: int):
     if i < j:
         midpoint = (i+j) // 2
-        MergeSort(A,i,midpoint)
+        MergeSort(A,i,midpoint) 
         MergeSort(A,midpoint+1,j)
         Merge(A,i,midpoint,j)
 
@@ -50,6 +51,7 @@ def Partition(A: list, i: int, j: int, p: int):
             A[low], A[high] = A[high], A[low]
             if A[low] == p and A[high] == p:
                 low = low + 1
+    return high
 
 def QuickSort(A: list, i: int, j: int):
     if i < j:
