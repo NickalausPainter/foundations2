@@ -1,4 +1,3 @@
-
 def SelectionSort(A: list, n: int):
     if n < 0:
         return
@@ -14,7 +13,6 @@ def InsertionSort(A: list, n: int):
             A[j], A[j-1] = A[j-1], A[j]
             j = j - 1
 
-
 def Merge(A: list, lower: int, mid: int, upper: int):
     L = A[lower:mid+1] + [float("inf")]
     R = A[mid+1:upper+1] + [float("inf")]
@@ -28,16 +26,12 @@ def Merge(A: list, lower: int, mid: int, upper: int):
             A[k] = R[j]
             j = j + 1
     
-
-
-
 def MergeSort(A: list, i: int, j: int):
     if i < j:
         midpoint = (i+j) // 2
         MergeSort(A,i,midpoint) 
         MergeSort(A,midpoint+1,j)
         Merge(A,i,midpoint,j)
-
 
 def Partition(A: list, i: int, j: int, p: int):
     low = i
