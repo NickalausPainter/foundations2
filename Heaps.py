@@ -15,7 +15,7 @@ class MaxHeap:
     def Insert(self,key,value):
         i = len(self.A)
         self.A.append(KDPair(key,value))
-        while (i > 1) and self.A[i].key > self.A[MaxHeap.Parent(i)].key:
+        while (i > 1) and self.A[i] > self.A[MaxHeap.Parent(i)]:
             swap(self.A,i,MaxHeap.Parent(i))
             i = MaxHeap.Parent(i)
 
@@ -50,7 +50,42 @@ class MaxHeap:
 class MinHeap:
     pass
 
+
 class Heap:
-    def __init__(self,comparator):
+    def __init__(self,variant="max"):
         self.A = []
-        self.compare = comparator
+        if variant == "max":
+            self.heapProperty = lambda x,y : x >= y
+        else:
+            self.heapProperty = lambda x,y : x <= y
+
+    def Parent(i):
+        return (i-1) // 2
+    def Left(i):
+        return 2*i + 1
+    def Right(i):
+        return 2*(i+1)
+    
+    def Insert(self,K,D):
+        i = len(self.A)
+        self.A.append(KDPair(K,D))
+        while (i > 1) and not self.heapProperty(self.A[i], self.A[Heap.Parent(i)]):
+            swap(self.A,i,Heap.Parent(i))
+            i = Heap.Parent(i)
+
+    def Heapify(self):
+        heapInvalid = True
+        j = 0
+        while heapInvalid:
+            L = Heap.Left(j)
+            R = Heap.Right(j)
+            largestInd = j
+            if L < len(self.A) and self.heapProperty(self.A[L], self.A[largestInd]):
+                largestInd = L
+            if R < len(self.A) and self.heapProperty(self.A[R], self.A[largestInd]):
+                largestInd = R
+            if j != largestInd:
+                swap(self.A,j,largestInd)
+            else:
+                heapInvalid = False
+
